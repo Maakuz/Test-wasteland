@@ -49,6 +49,8 @@
   <ItemGroup>
      <Compile Include="Assets\MouseLook.cs" />
      <Compile Include="Assets\PlayerScript.cs" />
+     <Compile Include="Assets\CharacterAnimator.cs" />
+     <Compile Include="Assets\CutterTool.cs" />
  <Reference Include="UnityEngine">
  <HintPath>D:/2020.3.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

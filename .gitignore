@@ -367,3 +367,5 @@ FodyWeavers.xsd
 /Library/ShaderCache
 /Library/metadata
 /UserSettings
+/Temp
+/Library/EditorInstance.json
