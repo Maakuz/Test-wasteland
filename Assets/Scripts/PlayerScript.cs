@@ -161,11 +161,11 @@ public class PlayerScript : MonoBehaviour
 		m_inVehicle = true;
 	}
 
-	public void exitDriverSeat(Vector3 exitLocation)
+	public void exitDriverSeat(Vector3 exitLocation, Vector3 rotation)
 	{
 		SetCollission(true);
 		transform.position = exitLocation;
-		transform.rotation = Quaternion.identity;
+		transform.rotation = Quaternion.Euler(rotation);
 		transform.parent = null;
 		m_inVehicle = false;
 	}

@@ -47,24 +47,23 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\PlaneControllerOld.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceConfigDrawer.cs" />
      <Compile Include="Assets\Scripts\EnterPlane.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\Scripts\PlaneControlTest.cs" />
-     <Compile Include="Assets\Scripts\Constants.cs" />
-     <Compile Include="Assets\Scripts\CharacterAnimator.cs" />
-     <Compile Include="Assets\Scripts\PlayerScript.cs" />
-     <Compile Include="Assets\Scripts\CutterTool.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceEditor.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\PlaneController.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AircraftGizmos.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AircraftPhysicsDisplaySettings.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceConfigEditor.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceConfigDrawer.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurfaceConfig.cs" />
+     <Compile Include="Assets\Scripts\Constants.cs" />
+     <Compile Include="Assets\Scripts\HierarchyFilter.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\BiVec3.cs" />
-     <Compile Include="Assets\Scripts\Aerodynamics\AircraftPhysics.cs" />
+     <Compile Include="Assets\Scripts\CharacterAnimator.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceConfigEditor.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\PlaneController.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\AircraftPhysics.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AircraftGizmos.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurfaceConfig.cs" />
+     <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AircraftPhysicsDisplaySettings.cs" />
+     <Compile Include="Assets\Scripts\CutterTool.cs" />
  <Reference Include="UnityEngine">
  <HintPath>D:/2020.3.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

@@ -22,6 +22,7 @@ public class PlaneController : MonoBehaviour
     float m_brakesTorque;
 
     AircraftPhysics m_physics;
+    private PlayerScript m_playerScript;
     Rigidbody m_rb;
 
     private void OnDrawGizmos()
@@ -57,6 +58,13 @@ public class PlaneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             m_brakesTorque = m_brakesTorque > 0 ? 0 : 100f;
+        }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            m_playerScript.exitDriverSeat(new Vector3(0, 150, 0), Vector3.Cross(transform.right, new Vector3(0, 1, 0)));
+            enabled = false;
+            m_playerScript.enabled = true;
         }
 
         displayText.text = "V: " + ((int)m_rb.velocity.magnitude).ToString("D3") + " m/s\n";
