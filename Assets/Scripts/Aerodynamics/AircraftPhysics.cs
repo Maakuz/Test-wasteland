@@ -52,12 +52,12 @@ public class AircraftPhysics : MonoBehaviour
     private void FixedUpdate()
     {
         //TODO: WIND?
-        BiVec3 forceAndTorqueNow = CalculateForces(m_rb.velocity, m_rb.angularVelocity, Vector3.zero, 1.2f, m_rb.worldCenterOfMass);
+        BiVec3 forceAndTorqueNow = CalculateForces(m_rb.velocity, m_rb.angularVelocity, Vector3.zero, Constants.AIR_DENSITY, m_rb.worldCenterOfMass);
 
         Vector3 velPrediction = PredictVel(forceAndTorqueNow.force + transform.forward * m_thrust * m_thrustPercent + Physics.gravity * m_rb.mass);
         Vector3 angVelPrediction = PredictAngVel(forceAndTorqueNow.torque);
 
-        BiVec3 forceAndTorquePrediction = CalculateForces(velPrediction, angVelPrediction, Vector3.zero, 1.2f, m_rb.worldCenterOfMass);
+        BiVec3 forceAndTorquePrediction = CalculateForces(velPrediction, angVelPrediction, Vector3.zero, Constants.AIR_DENSITY, m_rb.worldCenterOfMass);
 
         m_currentForceAndTorque = (forceAndTorqueNow + forceAndTorquePrediction) * 0.5f;
         m_rb.AddForce(m_currentForceAndTorque.force);

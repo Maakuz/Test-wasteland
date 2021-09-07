@@ -47,15 +47,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Housing\RoomModule.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceConfigDrawer.cs" />
      <Compile Include="Assets\Scripts\EnterPlane.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceEditor.cs" />
      <Compile Include="Assets\Scripts\Constants.cs" />
      <Compile Include="Assets\Scripts\HierarchyFilter.cs" />
+     <Compile Include="Assets\Scripts\Housing\HouseModule.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\BiVec3.cs" />
      <Compile Include="Assets\Scripts\CharacterAnimator.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AeroSurfaceConfigEditor.cs" />
+     <Compile Include="Assets\Scripts\Housing\HouseEditor.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\PlaneController.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AircraftPhysics.cs" />

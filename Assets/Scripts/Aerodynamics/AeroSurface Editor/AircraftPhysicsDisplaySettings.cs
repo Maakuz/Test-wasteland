@@ -30,7 +30,7 @@ public class AircraftPhysicsDisplaySettings : ScriptableObject
     public Color adcColor = new Color(0.373f, 0.682f, 1.000f, 1.000f);
     public float displayAngleOfAttack = 5;
     public float displayAirspeed = 100;
-    public float displayAirDensity = 1.2f;
+    public float displayAirDensity = Constants.AIR_DENSITY;
 
     [Header("Surfaces")]
     public bool showSurfaces = true;
