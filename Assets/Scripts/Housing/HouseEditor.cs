@@ -4,6 +4,7 @@ using UnityEngine;
 public class HouseEditor : EditorWindow
 {
     HouseModule m_module;
+    int m_level = 0;
 
     [MenuItem("Window/House Editor")]
     public static void ShowWindow()
@@ -17,24 +18,51 @@ public class HouseEditor : EditorWindow
         {
             GUILayout.Label("House module selected");
 
-            GUILayout.BeginHorizontal(GUILayout.Width(150));
-            GUILayout.Button("1");
-            if(GUILayout.Button("2"))
+            for (int i = -1; i < 2; i++)
             {
-                m_module.AddNewRoomModule(HouseModule.ModuleType.small, new Vector3Int(0, 0, 0));
+                GUILayout.BeginHorizontal(GUILayout.Width(150));
+
+                for (int j = -1; j < 2; j++)
+                {
+                    //Logic to determinate if space is occupied or adjacent
+                    string buttonName = "Empty";
+                    if (m_module.IsOccupied(new Vector3Int(j, m_level, i)))
+                        buttonName = "Taken";
+                        
+
+
+                    if (GUILayout.Button(buttonName))
+                    { 
+                        m_module.AddNewRoomModule(HouseModule.ModuleType.small, new Vector3Int(j, m_level, i));
+                    }
+
+                }
+
+                GUILayout.EndHorizontal();
             }
-            GUILayout.Button("3");
-            GUILayout.EndHorizontal();
+
             GUILayout.BeginHorizontal(GUILayout.Width(150));
-            GUILayout.Button("1");
-            GUILayout.Button("2");
-            GUILayout.Button("3");
+            if (GUILayout.Button("UP"))
+            {
+                m_level++;
+            }
+            if (GUILayout.Button("ZERO"))
+            {
+                m_level = 0;
+            }
+            if (GUILayout.Button("DOWN"))
+            {
+                m_level--;
+                m_level = m_level > 0 ? m_level : 0;
+            }
+
+
             GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal(GUILayout.Width(150));
-            GUILayout.Button("1");
-            GUILayout.Button("2");
-            GUILayout.Button("3");
-            GUILayout.EndHorizontal();
+            GUILayout.Label("Level: " + m_level.ToString());
+
+
+
+
         }
         else
             GUILayout.Label("No house module selected");
@@ -48,7 +76,10 @@ public class HouseEditor : EditorWindow
                 Debug.LogWarning("No HouseModule on selected item.");
 
             else
+            {
                 m_module = mod;
+                m_level = 0;
+            }
         }
         
         

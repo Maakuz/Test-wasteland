@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurfaceConfig.cs" />
      <Compile Include="Assets\Scripts\Aerodynamics\AeroSurface Editor\AircraftPhysicsDisplaySettings.cs" />
      <Compile Include="Assets\Scripts\CutterTool.cs" />
+     <Compile Include="Assets\Scripts\HelperFunctions.cs" />
  <Reference Include="UnityEngine">
  <HintPath>D:/2020.3.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

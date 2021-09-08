@@ -26,13 +26,36 @@ public class HouseModule : MonoBehaviour
         RefreshRoomList();
         if (m_rooms.Count == 0)
         {
-            GameObject roomGO = new GameObject();
-            roomGO.AddComponent<RoomModule>();
-            roomGO.transform.parent = transform;
+            GameObject roomGO = Instantiate(Resources.Load<GameObject>("House Prefabs/Room"), transform);
             RoomModule room = roomGO.GetComponent<RoomModule>();
-            room.m_location = new Vector3Int(0, 0, 0);
+            room.NewRoom(type, new Vector3Int(0, 0, 0));
             m_rooms.Add(roomGO.transform);
         }
+
+        else 
+        {
+            if (!IsOccupied(location))
+            {
+                GameObject roomGO = Instantiate(Resources.Load<GameObject>("House Prefabs/Room"), transform);
+                roomGO.transform.localPosition = HelperFunctions.Mul(roomGO.GetComponent<MeshFilter>().sharedMesh.bounds.size, location);
+                RoomModule room = roomGO.GetComponent<RoomModule>();
+                room.NewRoom(type, location);
+                m_rooms.Add(roomGO.transform);
+            }
+        }
+    }
+
+    public bool IsOccupied(Vector3Int location)
+    {
+        RefreshRoomList();
+
+        foreach (Transform room in m_rooms)
+        {
+            if (room.GetComponent<RoomModule>().m_location == location)
+                return true;
+        }
+
+        return false;
     }
 
     public void RefreshRoomList()

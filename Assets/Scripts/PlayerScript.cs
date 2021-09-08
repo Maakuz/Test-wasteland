@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
 	[SerializeField] private float m_maxToZero;
 	[SerializeField] private float m_accelRateSprint;
 	[SerializeField] private float m_accelRateWalk;
+	[SerializeField] private float m_stepOffset;
 	private float m_decelRate;
 
 	[SerializeField] bool m_recalculateRates;
@@ -66,6 +67,7 @@ public class PlayerScript : MonoBehaviour
 		m_zeroToMaxSprint = 1f;
 		m_zeroToMaxWalk = 0.3f;
 		m_maxToZero = 0.5f;
+		m_stepOffset = 0.7f;
 
 		recalculateRates();
 
@@ -94,6 +96,12 @@ public class PlayerScript : MonoBehaviour
 			//TODO: Pre-calculate when final
 			m_yVelocity.y = Mathf.Sqrt(m_jumpHeight * -2f * Constants.gravity);
 		}
+
+		if (m_yVelocity.y > 0)
+			m_controller.stepOffset = 0;
+
+		else
+			m_controller.stepOffset = m_stepOffset;
 
 		bool sprinting = Input.GetKey(KeyCode.LeftShift);
 		float rate = sprinting ? m_accelRateSprint : m_accelRateWalk;
@@ -127,11 +135,14 @@ public class PlayerScript : MonoBehaviour
 
 	void updateGravity()
 	{
-		m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundRadius, m_groundMask);
+		if (m_yVelocity.y < 0f)
+		{
+			m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundRadius, m_groundMask);
 
-		//Not 0 since the detection happens preemptively
-		if (m_isGrounded && m_yVelocity.y < 0)
-			m_yVelocity.y = -25;
+			//Not 0 since the detection happens preemptively
+			if (m_isGrounded)
+				m_yVelocity.y = -25;
+		}
 
 		m_yVelocity.y += Constants.gravity * Time.deltaTime;
 		if (m_controller)
