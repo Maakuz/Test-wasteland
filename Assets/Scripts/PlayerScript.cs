@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour
 		m_zeroToMaxSprint = 1f;
 		m_zeroToMaxWalk = 0.3f;
 		m_maxToZero = 0.5f;
-		m_stepOffset = 0.7f;
+		m_stepOffset = 1f;
 
 		recalculateRates();
 

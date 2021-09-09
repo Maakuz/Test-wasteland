@@ -6,7 +6,9 @@ public class HouseModule : MonoBehaviour
 {
     public enum ModuleType {small = 0 };
 
+
     [SerializeField] List<Transform> m_rooms;
+    
 
 
     // Start is called before the first frame update
@@ -21,7 +23,8 @@ public class HouseModule : MonoBehaviour
         
     }
 
-    public void AddNewRoomModule(ModuleType type, Vector3Int location)
+    //Returns null if occupied
+    public RoomModule AddNewRoomModule(ModuleType type, Vector3Int location)
     {
         RefreshRoomList();
         if (m_rooms.Count == 0)
@@ -30,32 +33,37 @@ public class HouseModule : MonoBehaviour
             RoomModule room = roomGO.GetComponent<RoomModule>();
             room.NewRoom(type, new Vector3Int(0, 0, 0));
             m_rooms.Add(roomGO.transform);
+            return room;
         }
 
         else 
         {
-            if (!IsOccupied(location))
+            if (!GetOccupant(location))
             {
                 GameObject roomGO = Instantiate(Resources.Load<GameObject>("House Prefabs/Room"), transform);
                 roomGO.transform.localPosition = HelperFunctions.Mul(roomGO.GetComponent<MeshFilter>().sharedMesh.bounds.size, location);
                 RoomModule room = roomGO.GetComponent<RoomModule>();
                 room.NewRoom(type, location);
                 m_rooms.Add(roomGO.transform);
+                return room;
             }
         }
+
+        return null;
     }
 
-    public bool IsOccupied(Vector3Int location)
+    public RoomModule GetOccupant(Vector3Int location)
     {
         RefreshRoomList();
 
         foreach (Transform room in m_rooms)
         {
-            if (room.GetComponent<RoomModule>().m_location == location)
-                return true;
+            RoomModule module = room.GetComponent<RoomModule>();
+            if (module.m_location == location)
+                return module;
         }
 
-        return false;
+        return null;
     }
 
     public void RefreshRoomList()

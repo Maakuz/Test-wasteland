@@ -17,6 +17,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 65cd6732a9b37ae428b55c2ea3bbb787, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Transparent
     second: {fileID: 2100000, guid: 63c161f34dbd5024692d3ecd38d97331, type: 2}
   materials:
