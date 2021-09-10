@@ -5,23 +5,29 @@ using System.Collections.Generic;
 
 public class RoomModule : MonoBehaviour
 {
+    public static readonly string[] wallTypes = { "wall", "window" };
+    public enum WallType { wall = 0, window = 1 };
+    public enum Sides { left, right, front, back, top, bottom };
+
     [Serializable]
     public class Side
     {
         private GameObject go;
         private Vector3 rotation;
         [SerializeField] private WallType walltype;
+        [SerializeField] private Sides side;
         public string name;
 
         public WallType Walltype { get => walltype;}
         public GameObject Go { get => go; }
 
-        public Side(string name = "DefaultSideName", Vector3 rotation = default(Vector3))
+        public Side(Sides whatSide, string name = "DefaultSideName", Vector3 rotation = default(Vector3))
         {
             this.name = name;
             this.go = null;
             this.walltype = WallType.wall;
             this.rotation = rotation;
+            this.side = whatSide;
         }
 
         public void SetSide(WallType walltype, Transform parent)
@@ -33,23 +39,31 @@ public class RoomModule : MonoBehaviour
             switch (walltype)
             {
                 case WallType.wall:
-                    go = Instantiate(Resources.Load<GameObject>("House Prefabs/Wall"), parent);
+                    if (side == Sides.left || side == Sides.right)
+                        go = Instantiate(Resources.Load<GameObject>("House Prefabs/Wall"), parent);
+
+                    else if(side == Sides.front || side == Sides.back)
+                        go = Instantiate(Resources.Load<GameObject>("House Prefabs/Long Wall"), parent);
                     break;
                 case WallType.window:
-                    go = Instantiate(Resources.Load<GameObject>("House Prefabs/Window"), parent);
+                    if (side == Sides.left || side == Sides.right)
+                        go = Instantiate(Resources.Load<GameObject>("House Prefabs/Window"), parent);
+
+                    else if (side == Sides.front || side == Sides.back)
+                        go = Instantiate(Resources.Load<GameObject>("House Prefabs/Long Window"), parent);
                     break;
             }
             go.name = name;
             go.transform.Rotate(rotation);
         }
     }
-    public static readonly string[] wallTypes = { "wall", "window" };
-    public enum WallType { wall = 0, window = 1 };
-    public enum Sides {left, right, front, back, top, bottom };
+
 
     public Vector3Int m_location;
     [SerializeField] Side m_right;
     [SerializeField] Side m_left;
+    [SerializeField] Side m_front;
+    [SerializeField] Side m_back;
 
     // Start is called before the first frame update
     void Start()
@@ -67,11 +81,17 @@ public class RoomModule : MonoBehaviour
     {
         m_location = location;
 
-        m_right = new Side("Right", new Vector3(0, 180, 0));
+        m_right = new Side(Sides.right, "Right", new Vector3(0, 180, 0));
         m_right.SetSide(WallType.wall, transform);
 
-        m_left = new Side("Left");
+        m_left = new Side(Sides.left, "Left");
         m_left.SetSide(WallType.wall, transform);
+
+        m_front = new Side(Sides.front, "Front", new Vector3(0, 180, 0));
+        m_front.SetSide(WallType.wall, transform);
+
+        m_back = new Side(Sides.back, "Back");
+        m_back.SetSide(WallType.wall, transform);
     }
 
     public Side GetSide(Sides whatSide)
@@ -83,9 +103,9 @@ public class RoomModule : MonoBehaviour
             case Sides.right:
                 return m_right;
             case Sides.front:
-                break;
+                return m_front;
             case Sides.back:
-                break;
+                return m_back;
             case Sides.top:
                 break;
             case Sides.bottom:
@@ -94,7 +114,7 @@ public class RoomModule : MonoBehaviour
                 break;
         }
 
-        return new Side();
+        return new Side(Sides.top);
     }
 
     public List<Side> GetAllSides()
@@ -103,6 +123,8 @@ public class RoomModule : MonoBehaviour
 
         sides.Add(m_left);
         sides.Add(m_right);
+        sides.Add(m_front);
+        sides.Add(m_back);
 
         return sides;
     }

@@ -81,4 +81,9 @@ public class HouseModule : MonoBehaviour
 
         return children;
     }
+
+    public void ForceRoomConnectors()
+    { 
+        
+    }
 }
